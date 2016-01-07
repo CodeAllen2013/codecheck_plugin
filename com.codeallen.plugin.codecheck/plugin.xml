@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+      <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IProject"
+            adaptable="true"
+            id="com.codeallen.codecheck.contribution1">
+            <menu
+                id="codecheck.menu"
+                label="TenantIdCheck"
+                path="additions">
+                <separator
+                    name="xbatch"/>
+            </menu>
+            <action
+                label="Activate TenantIdCheck"
+                class="com.codeallen.plugin.codecheck.popup.actions.TenantIdCheckAction"
+                enablesFor="+"
+                menubarPath="codecheck.menu/ondemand1"
+                id="com.codeallen.codecheck.newAction1">
+                </action>
+	         <action
+	               label="Deactivate TenantIdCheck"
+	               class="com.codeallen.plugin.codecheck.popup.actions.TenantIdCheckDeAction"
+	               enablesFor="+"
+	               menubarPath="codecheck.menu/ondemand2"
+	               id="com.codeallen.codecheck.newAction2">
+	         </action>
+      </objectContribution>
+   </extension>
+   
+    
+    <extension id="CodeCheckBuilder" name="builderName"
+		point="org.eclipse.core.resources.builders">
+		<builder >
+			<run class="com.codeallen.plugin.codecheck.builder.CodeCheckBuilder">
+			</run>
+		</builder>
+   </extension>
+   <extension id="CodeCheckNature" name="natureName"
+		point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="com.codeallen.plugin.codecheck.nature.CodeCheckNature">
+			</run>
+		</runtime>
+    </extension>
+    
+    
+    <extension  
+         id="CodeCheckMark"  
+         name="My Marker"  
+         point="org.eclipse.core.resources.markers">  
+      <persistent  
+            value="true">  
+      </persistent>  
+      <super type="org.eclipse.core.resources.problemmarker" />  
+      <super type="org.eclipse.core.resources.textmarker"/>
+   </extension>  
+
+
+	<extension
+	         point="org.eclipse.ui.preferencePages">
+	           <page
+	            class="com.codeallen.plugin.codecheck.preference.CodeCheckPreferencePage"
+	            id="com.codeallen.plugin.codecheck.preference.CodeCheckPreferencePage"
+	            name="租户id表配置"/>
+	</extension>
+	
+	<extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="com.codeallen.plugin.codecheck.preference.PreferenceInitializer">
+      </initializer>
+   </extension>
+
+
+</plugin>
